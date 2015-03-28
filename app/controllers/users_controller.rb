@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 		if @user.save
 			session[:user_id] = @user.id 
 			redirect_to root_url, notice: "You have successfully signed up!"
+			UserMailer.registration_confirmation(@user).deliver
 		else 
 			render "new"
 		end
