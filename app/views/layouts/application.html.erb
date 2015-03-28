@@ -14,9 +14,9 @@
 			<li><%= link_to "Github Repo", "https://github.com/kellobri/blocipedia" %></li>
 				<div class="pull-right user-info">
 					<% if current_user %>
-						Hello <%= link_to (current_user.name || current_user.email), edit_user_registration_path %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+						Hello <%= current_user.name || current_user.email %>! <%= link_to "Sign out", logout_path %>
 					<% else %>
-						<%= link_to "Sign In", new_user_session_path %> or <%= link_to "Sign Up", new_user_registration_path %>
+						<%= link_to "Sign In", signin_path %> or <%= link_to "Sign Up", signup_path %>
 					<% end %>
 				</div>
 		</ul>
