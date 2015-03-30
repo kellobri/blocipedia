@@ -15,10 +15,14 @@ ActiveRecord::Schema.define(version: 20150328215338) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
-    t.string   "password_digest"
+    t.text     "password_digest"
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.boolean  "email_confirmed"
+    t.string   "remember_token"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
