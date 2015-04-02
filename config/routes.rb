@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new', as: 'signin'
   get 'signup', to: 'users#new', as: 'signup'
   get 'edit', to: 'users#edit', as: 'edit'
+  get 'reset', to: 'password_resets#new', as: 'reset'
   resources :users
   resources :sessions, only: [:create, :destroy]
+  resources :password_resets
 
   get 'welcome/index'
   root to: 'welcome#index'

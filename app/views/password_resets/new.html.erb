@@ -1,0 +1,25 @@
+<h2>Request a Password Reset</h2>
+<br/>
+
+<div class="row">
+	<div class="col-md-6"> 
+
+  		<%= form_tag password_resets_path do %>
+  			<div class="form-group">
+  				<%= label_tag :email %>
+  				<%= text_field_tag :email, params[:email], :placeholder => "Email address" %><br/>
+  				<small>Provide your account email address to receive a password reset link.</small>
+  			</div>
+
+  			<div class="form-group">
+  				<%= submit_tag :recover, value: "Send Reset Request", class: 'btn btn-success' %>
+  			</div>
+  			<div class="messages">
+  				<% flash.each do |name,msg| %>
+  					<%= content_tag :div, msg, id: "flash_#{name}", class: "notification" %>
+  				<% end %>
+  			</div>
+  		<% end %>
+
+  	</div>
+</div>

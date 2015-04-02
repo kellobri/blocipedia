@@ -20,4 +20,11 @@ class User < ActiveRecord::Base
 			nil
 		end
 	end
+
+	def send_password_reset
+		self.update_column(:password_reset_token, SecureRandom.urlsafe_base64)
+		self.update_column(:password_reset_sent_at, Time.zone.now)
+		UserMailer.send_password_reset_mail(self).deliver
+	end
+
 end
