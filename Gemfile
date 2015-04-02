@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 #gem 'bcrypt', :require => 'bcrypt'
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7', :require => 'bcrypt'
 
 gem 'figaro', '1.0'
 
