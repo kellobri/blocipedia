@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150328215338) do
+ActiveRecord::Schema.define(version: 20150403050200) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -24,5 +24,17 @@ ActiveRecord::Schema.define(version: 20150328215338) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "wikis", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.boolean  "private"
+    t.integer  "user_id"
+    t.datetime "last_update_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "wikis", ["user_id"], name: "index_wikis_on_user_id"
 
 end
