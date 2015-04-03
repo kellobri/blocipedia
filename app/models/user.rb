@@ -29,4 +29,17 @@ class User < ActiveRecord::Base
 		UserMailer.send_password_reset_mail(self).deliver
 	end
 
+	def admin?
+		role == 'admin'
+	end
+
+	def standard?
+		role == 'standard'
+	end
+
+	def premium?
+		role == 'premium'
+	end
+	
+
 end

@@ -3,6 +3,7 @@ class WikisController < ApplicationController
 
   def index
   	@wikis = Wiki.all
+    authorize @wikis
   end
 
   def show
@@ -11,14 +12,16 @@ class WikisController < ApplicationController
 
   def new
   	@wiki = Wiki.new
+    authorize @wiki
   end
 
   def create
   	@user = current_user
   	@wiki = Wiki.new(params.require(:wiki).permit(:title, :body, :last_update_at))
-  	@wiki.user = @user
-  	@wiki.last_update_at = Time.zone.now
+    authorize @wiki
   	if @wiki.save
+      @wiki.user = @user
+      @wiki.last_update_at = Time.zone.now
   		flash[:notice] = "A new wiki is born!"
   		redirect_to @wiki
   	else

@@ -29,6 +29,7 @@ gem 'bootstrap-sass'
 gem 'bcrypt', '~> 3.1.7', :require => 'bcrypt'
 
 gem 'figaro', '1.0'
+gem 'pundit'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
