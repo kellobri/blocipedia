@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
 	before_create { generate_remember_token(:remember_token) }
 
+	after_initialize :init
+
 	def generate_remember_token(column)
 		begin
 			self[column] = SecureRandom.urlsafe_base64
@@ -27,6 +29,22 @@ class User < ActiveRecord::Base
 		self.update_column(:password_reset_token, SecureRandom.urlsafe_base64)
 		self.update_column(:password_reset_sent_at, Time.zone.now)
 		UserMailer.send_password_reset_mail(self).deliver
+	end
+
+	def admin?
+		role == 'admin'
+	end
+
+	def standard?
+		role == 'standard'
+	end
+
+	def premium?
+		role == 'premium'
+	end
+	
+	def init
+		self.role ||= 'standard'
 	end
 
 end

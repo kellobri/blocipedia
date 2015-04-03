@@ -45,8 +45,7 @@ class UsersController < ApplicationController
 
   	def check_signed_in
   		if !signed_in?
-  			flash.alert.now = "Please sign in to continue"
-  			redirect_to root_url
+  			redirect_to root_url, notice: "Please sign in to continue."
   		else
   			@user = current_user
   		end

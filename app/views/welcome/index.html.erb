@@ -3,7 +3,16 @@
 	<h1>Blocipedia</h1>
 	<p>Blocipedia is your one-stop shop for all your bloc-wiki needs.</p>
 	<p>
-		<%= link_to "Sign In", signin_path, class: 'btn btn-primary' %> or
-		<%= link_to "Sign Up", signup_path, class: 'btn btn-primary' %> today!
+		<% if policy(Wiki.new).create? %>
+			<%= link_to "Create a Wiki", new_wiki_path, class: 'btn btn-success btn-lg' %>
+		<% else %>
+			<%= link_to "Sign In", signin_path, class: 'btn btn-primary' %> or
+			<%= link_to "Sign Up", signup_path, class: 'btn btn-primary' %> today!
+		<% end %>
 	</p>
+	<p>
+		<%= link_to "View Blocipedia", wikis_path, class: 'btn btn-info btn-lg' %>
+	</p>
+	
+
 </div>

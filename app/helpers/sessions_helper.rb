@@ -8,7 +8,7 @@ module SessionsHelper
 		if session[:user]
 			@current_user ||= User.find(session[:user])
 		elsif cookies[:remember_token]
-			@current_user ||= User.find_by_remember_token!(cookies[:remember_token])
+			@current_user ||= User.find_by(remember_token: cookies[:remember_token])
 		end
 	end
 
