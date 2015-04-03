@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
 	before_create { generate_remember_token(:remember_token) }
 
+	after_initialize :init
+
 	def generate_remember_token(column)
 		begin
 			self[column] = SecureRandom.urlsafe_base64
@@ -41,5 +43,8 @@ class User < ActiveRecord::Base
 		role == 'premium'
 	end
 	
+	def init
+		self.role ||= 'standard'
+	end
 
 end
