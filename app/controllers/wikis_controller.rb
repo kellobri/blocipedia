@@ -32,10 +32,12 @@ class WikisController < ApplicationController
 
   def edit
   	@wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def update
   	@wiki = Wiki.find(params[:id])
+    authorize @wiki
   	if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :last_update_at))
   		@wiki.last_update_at = @wiki.evolve_time
   		flash[:notice] = "You have evolved this wiki."
@@ -49,6 +51,7 @@ class WikisController < ApplicationController
   def destroy
   	@wiki = Wiki.find(params[:id])
   	title = @wiki.title
+    authorize @wiki
 		if @wiki.destroy
 			flash[:notice] = "\"#{title}\" was removed from the wiki-net."
 			redirect_to wikis_path
