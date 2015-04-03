@@ -1,0 +1,15 @@
+<h1>
+	<%= @wiki.title %> 
+	<%= link_to "Edit Now!", edit_wiki_path(@wiki), class: 'btn btn-success' %> 
+	<%= link_to "Delete?", @wiki, method: :delete, class: 'btn btn-warning' %>
+</h1>
+<hr/>
+
+<small>
+	Wiki created by: <%= @wiki.user.name %> 
+	| Wiki last updated at: <%= @wiki.last_update_at %>
+</small>
+<br/>
+
+<br/>
+<p><%= @wiki.body %></p>
