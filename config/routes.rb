@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:create, :destroy]
   resources :password_resets
+  resources :charges, only: [:new, :create]
 
   resources :wikis
 
