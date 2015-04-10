@@ -35,7 +35,12 @@
     <%= link_to "Reset My Password", reset_path %>
     <br/>
 
-    <h3>Cancel my account</h3>
+    <h3>Upgrade your account</h3>
+    <div class="form-group">
+      <%= link_to "Upgrade to Premium", premium_path, class: 'btn btn-info' %>
+    </div>
+
+    <h3>Cancel your account</h3>
     <div class="form-group">
       <p>Unhappy? <%= button_to "Cancel my account", @user, data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
     </div>
