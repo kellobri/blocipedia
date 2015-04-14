@@ -37,7 +37,14 @@
 
     <h3>Upgrade your account</h3>
     <div class="form-group">
-      <%= link_to "Upgrade to Premium", premium_path, class: 'btn btn-info' %>
+      <% if @user.standard? %>
+        <%= link_to "Upgrade to Premium", premium_path, class: 'btn btn-info' %>
+      <% else %>
+          <%= link_to "Upgrade to Premium", premium_path, class: 'btn btn-info disabled' %>
+          <br/><small>Your account has already been upgraded to premium!</small>
+          <br/><small>Would you like to 
+          <%= link_to "downgrade your premium account?", user_path(current_user, user: {role: 'premium'}), data: { confirm: "Are you sure? You will no longer be able to edit your private wiki pages." }, method: :put %></p>
+      <% end %>
     </div>
 
     <h3>Cancel your account</h3>

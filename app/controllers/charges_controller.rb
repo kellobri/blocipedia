@@ -14,6 +14,8 @@ class ChargesController < ApplicationController
 		)
 
 		flash[:success] = "Thanks for upgrading to premium."
+		PremiumWelcome.new_premium_invoice(current_user).deliver
+
 		redirect_to root_url
 
 	rescue Stripe::CardError => e

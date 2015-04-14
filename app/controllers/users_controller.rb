@@ -31,7 +31,11 @@ class UsersController < ApplicationController
 
 	def update
 		if @user.update_attributes(user_params)
-			redirect_to root_url, notice: "You have updated your user account settings."
+			if @user.update_attribute(:role, params[:role])
+				redirect_to root_url, notice: "You have downgraded your account to standard."
+			else
+				redirect_to root_url, notice: "You have updated your user account settings."
+			end
 		else
 			render 'edit'
 		end
@@ -40,7 +44,7 @@ class UsersController < ApplicationController
 	private
 
   	def user_params
-    	params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    	params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
   	end
 
   	def check_signed_in
