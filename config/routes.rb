@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new', as: 'signup'
   get 'edit', to: 'users#edit', as: 'edit'
   get 'reset', to: 'password_resets#new', as: 'reset'
+  get 'premium', to: 'charges#new', as: 'premium'
   resources :users
   resources :sessions, only: [:create, :destroy]
   resources :password_resets
@@ -14,4 +15,5 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   root to: 'welcome#index'
+
 end

@@ -1,7 +1,7 @@
 class ChargesController < ApplicationController
 	
 	def create
-		customer = Stripe::Custormer.create(
+		customer = Stripe::Customer.create(
 			email: current_user.email,
 			card: params[:stripeToken]
 		)
@@ -10,10 +10,12 @@ class ChargesController < ApplicationController
 			#amount: Amount.default,
 			amount: 15_00,
 			description: "Bolcipedia Premium Membership - #{current_user.email}",
-			currentcy: 'usd'
+			currency: 'usd'
 		)
 
 		flash[:success] = "Thanks for upgrading to premium."
+		PremiumWelcome.new_premium_invoice(current_user).deliver
+
 		redirect_to root_url
 
 	rescue Stripe::CardError => e
@@ -23,7 +25,7 @@ class ChargesController < ApplicationController
 
 	def new
 		@stripe_btn_data = {
-			key: "#{ Rails.configuration.stripe[:publishable_key] }",
+			key: Rails.configuration.stripe[:publishable_key],
 			description: "Bolcipedia Premium Membership - #{current_user.name}",
 			amount: 15_00
 		}

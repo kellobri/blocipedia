@@ -32,6 +32,7 @@ gem 'figaro', '1.0'
 gem 'pundit'
 gem 'faker'
 gem 'stripe'
+gem 'stripe_event'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
