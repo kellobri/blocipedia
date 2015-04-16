@@ -33,12 +33,20 @@ class UsersController < ApplicationController
 		if @user.update_attributes(user_params)
 			if @user.update_attribute(:role, params[:role])
 				redirect_to root_url, notice: "You have downgraded your account to standard."
+				@wikis = @user.wikis
+				@wikis.update_all({:privatewiki => false})
 			else
 				redirect_to root_url, notice: "You have updated your user account settings."
 			end
 		else
 			render 'edit'
 		end
+	end
+
+	def wikis
+		@user = User.find(params[:id])
+		@wikis = @user.wikis
+		authorize @user
 	end
 
 	private

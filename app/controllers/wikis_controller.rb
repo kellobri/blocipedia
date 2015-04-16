@@ -2,12 +2,13 @@ class WikisController < ApplicationController
 
 
   def index
-  	@wikis = Wiki.all
+  	@wikis = Wiki.visible_to(current_user)
     authorize @wikis
   end
 
   def show
   	@wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
@@ -17,11 +18,10 @@ class WikisController < ApplicationController
 
   def create
   	@user = current_user
-  	@wiki = Wiki.new(params.require(:wiki).permit(:title, :body, :last_update_at))
+  	@wiki = Wiki.new(params.require(:wiki).permit(:title, :body, :privatewiki))
+    @wiki.assign_attributes({ :created_by => @user.name, :last_update_at => Time.zone.now, :user => @user })
     authorize @wiki
   	if @wiki.save
-      @wiki.user = @user
-      @wiki.last_update_at = Time.zone.now
   		flash[:notice] = "A new wiki is born!"
   		redirect_to @wiki
   	else
@@ -38,7 +38,7 @@ class WikisController < ApplicationController
   def update
   	@wiki = Wiki.find(params[:id])
     authorize @wiki
-  	if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :last_update_at))
+  	if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :last_update_at, :privatewiki))
   		@wiki.last_update_at = @wiki.evolve_time
   		flash[:notice] = "You have evolved this wiki."
   		redirect_to @wiki

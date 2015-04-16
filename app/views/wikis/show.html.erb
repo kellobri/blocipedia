@@ -1,4 +1,5 @@
 <h1><%= @wiki.title %></h1> 
+
 <h4>
 	<% if policy(@wiki).update? %>
 		Contributor tools:  <%= link_to "Edit Now!", edit_wiki_path(@wiki), class: 'btn btn-success btn-xs' %> 
@@ -8,10 +9,20 @@
 		<%= link_to "Sign Up", signup_path, class: 'btn btn-primary btn-xs' %> to contribute!
 	<% end %>
 </h4>
+
+<small>
+	<% if @wiki.privatewiki == true %>
+		This wiki is private!
+		<%= link_to "Click here", wiki_path(@wiki, wiki: {privatewiki: false}), data: { confirm: "Are you sure?" }, method: :put %> to make it public.
+	<% else %>
+		This wiki is public!
+	<% end %>
+</small>
+
 <hr/>
 
 <small>
-	Wiki created by: <%= @wiki.user.name %> 
+	Wiki created by: <%= @wiki.created_by %> 
 	| Wiki last updated at: <%= @wiki.last_update_at %>
 </small>
 <br/>
