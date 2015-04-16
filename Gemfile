@@ -33,6 +33,7 @@ gem 'pundit'
 gem 'faker'
 gem 'stripe'
 gem 'stripe_event'
+gem 'redcarpet'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
