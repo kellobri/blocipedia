@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'edit', to: 'users#edit', as: 'edit'
   get 'reset', to: 'password_resets#new', as: 'reset'
   get 'premium', to: 'charges#new', as: 'premium'
+  get 'users/:id/wikis', to: 'users#wikis', as: :user_wikis
+
   resources :users
   resources :sessions, only: [:create, :destroy]
   resources :password_resets

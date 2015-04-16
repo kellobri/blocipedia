@@ -14,7 +14,7 @@ class Wiki < ActiveRecord::Base
 		self.privatewiki ||= false
   end
 
-  def make_public
+  def public_wiki?
   		privatewiki == false
   end
 
