@@ -1,4 +1,4 @@
-<h1><%= @wiki.title %></h1> 
+<h1><%= markdown_to_html @wiki.title %></h1> 
 
 <h4>
 	<% if policy(@wiki).update? %>
@@ -28,4 +28,4 @@
 <br/>
 
 <br/>
-<p><%= @wiki.body %></p>
+<p><%= markdown_to_html @wiki.body %></p>
