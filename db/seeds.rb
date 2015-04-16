@@ -8,6 +8,13 @@ admin = User.new(
 	)
 admin.save!
 
+kellystandard = User.new(
+	name: 'Standard Kelly',
+	email: 'kobriant@gmu.edu',
+	password: 'blocparty'
+	)
+kellystandard.save!
+
 5.times do
 	user = User.new(
 		name: Faker::Name.name,
@@ -21,8 +28,11 @@ users = User.all
 15.times do 
 	Wiki.create!(
 		user: users.sample,
+		created_by: 'seed machine',
+		last_update_at: Time.zone.now, 
 		title: Faker::Lorem.sentence,
 		body: Faker::Lorem.paragraph
+
 	)
 end
 
