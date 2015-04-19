@@ -1,5 +1,6 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user
+  has_many :collaborators
 
   scope :visible_to, -> (user) { user.nil? ? where(privatewiki: false) :  where(["privatewiki = ? OR user_id = ?", false, user.id]) }
 

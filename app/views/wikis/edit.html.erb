@@ -19,6 +19,7 @@
 					<%= f.label :privatewiki, class: 'checkbox' do %>
 					<%= f.check_box :privatewiki %> Private wiki
 					<% end %>
+					<%= link_to "Add A Collaborator", new_collaborator_path(:wiki_id => @wiki.id), class: 'btn btn-info' %>
 				</div>
 			<% end %>
 

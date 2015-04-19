@@ -8,6 +8,7 @@ class WikisController < ApplicationController
 
   def show
   	@wiki = Wiki.find(params[:id])
+    @collaborators = @wiki.collaborators :include => [:user_id]
     authorize @wiki
   end
 
@@ -38,7 +39,7 @@ class WikisController < ApplicationController
   def update
   	@wiki = Wiki.find(params[:id])
     authorize @wiki
-  	if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :last_update_at, :privatewiki))
+  	if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :last_update_at, :privatewiki, :collaborators))
   		@wiki.last_update_at = @wiki.evolve_time
   		flash[:notice] = "You have evolved this wiki."
   		redirect_to @wiki

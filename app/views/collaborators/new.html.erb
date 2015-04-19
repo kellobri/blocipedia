@@ -1,0 +1,30 @@
+<h1>Wiki Collaborators</h1>
+
+<div class="row">
+	<div class="col-md-6">
+		Add a collaborator to your private wiki: 
+			<%= form_for @collaborator do |e| %>
+				<div class="form-group">
+					<%= e.label :email %>
+					<%= e.text_field :email, class: 'form-control', placeholder: "Enter collaborator user email" %>
+				</div>
+		
+				<div class="form-group">
+					<%= e.hidden_field :wiki_id, :value => params[:wiki_id] %>
+					<%= e.submit "Add", class: 'btn btn-success' %>
+				</div>
+			<% end %>		
+	</div>	
+	<div class="col-md-6">
+		<h4>Current private wiki collaborators:</h4>
+		<tr>
+			<% Array(Collaborator.find_by_wiki_id(params[:wiki_id])).each do |clb| %>
+				<% clb_usr = User.find(clb.user_id) %>
+				<td>
+					<%= clb_usr.name %>
+					<small><%= link_to "Remove", clb, method: :delete %></small>
+				</td>		
+			<% end %>
+		</tr>
+	</div>
+</div>

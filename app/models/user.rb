@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 	
 	has_many :wikis
+	has_many :collaborators
 
 	validates_uniqueness_of :email
 	validates :password, length: { minimum: 6 }, allow_blank: true
