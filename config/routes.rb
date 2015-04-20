@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :charges, only: [:new, :create]
 
   resources :wikis
+  resources :collaborators, only: [:new, :create, :destroy]
+
 
   get 'welcome/index'
   root to: 'welcome#index'
