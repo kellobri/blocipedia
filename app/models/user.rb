@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
 	def premium?
 		role == 'premium'
 	end
+
+	def collaborator?(wiki)
+		wiki.collaborators.exists?(user_id: self.id)
+	end
 	
 	def init
 		self.role ||= 'standard'

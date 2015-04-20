@@ -43,7 +43,7 @@
           <%= link_to "Upgrade to Premium", premium_path, class: 'btn btn-info disabled' %>
           <br/><small>Your account has already been upgraded to premium!</small>
           <br/><small>Would you like to 
-          <%= link_to "downgrade your premium account?", user_path(current_user, user: {role: 'standard'}), data: { confirm: "Are you sure? You will no longer be able to edit your private wiki pages." }, method: :put %></p>
+          <%= link_to "downgrade your premium account?", user_path(current_user, user: {role: 'standard'}), data: { confirm: "Are you sure? Your private wiki pages will immediately become public!" }, method: :put %></p>
       <% end %>
     </div>
 

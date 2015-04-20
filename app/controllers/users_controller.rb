@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 	def update
 		if @user.update_attributes(user_params)
 			if @user.update_attribute(:role, params[:role])
-				redirect_to root_url, notice: "You have downgraded your account to standard."
+				redirect_to root_url, notice: "You have downgraded your account to standard. All your private wikis have been made public."
 				@wikis = @user.wikis
 				@wikis.update_all({:privatewiki => false})
 			else
