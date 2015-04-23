@@ -8,7 +8,7 @@ class CollaboratorsController < ApplicationController
 	def create
 		collaborator = Collaborator.new(params.require(:collaborator).permit(:email, :wiki_id, :user_id))
 		user = User.find_by_email(params[:collaborator][:email])
-		@wiki = Wiki.find(params[:collaborator][:wiki_id])
+		@wiki = Wiki.friendly.find(params[:collaborator][:wiki_id])
 		collaborator.assign_attributes({ :email => params["email"], :wiki_id => @wiki.id, :user_id => user.id })
 
 		authorize collaborator

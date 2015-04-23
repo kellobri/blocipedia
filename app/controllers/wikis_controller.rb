@@ -8,7 +8,7 @@ class WikisController < ApplicationController
   end
 
   def show
-  	@wiki = Wiki.find(params[:id])
+  	@wiki = Wiki.friendly.find(params[:id])
     @collaborators = @wiki.collaborators :include => [:user_id]
     authorize @wiki
   end
@@ -33,12 +33,12 @@ class WikisController < ApplicationController
   end
 
   def edit
-  	@wiki = Wiki.find(params[:id])
+  	@wiki = Wiki.friendly.find(params[:id])
     authorize @wiki
   end
 
   def update
-  	@wiki = Wiki.find(params[:id])
+  	@wiki = Wiki.friendly.find(params[:id])
     authorize @wiki
   	if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :last_update_at, :privatewiki, :collaborators))
   		@wiki.last_update_at = @wiki.evolve_time
@@ -51,7 +51,7 @@ class WikisController < ApplicationController
   end
 
   def destroy
-  	@wiki = Wiki.find(params[:id])
+  	@wiki = Wiki.friendly.find(params[:id])
   	title = @wiki.title
     authorize @wiki
 		if @wiki.destroy
